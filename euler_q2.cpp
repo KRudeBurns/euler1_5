@@ -11,39 +11,67 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 #include <vector>
 using std::cout, std::cin, std::endl;
 
+void q2()
+{
+        unsigned long num1 = 0, num2 = 0, sum = 0, i = 0;
+        std::vector<unsigned long> sequence;
+        std::vector<unsigned long> even_sequence;
+        
+        while (num2 <= 4000000)
+        {
+            cout << "i = " << i << "\n";
+            cout << "Num1 = " << num1 << "\n";
+            cout << "Num2 = " << num2 << "\n";
+        
+	        if (num1 % 2 == 0)
+            {
+                cout << num1 << " is even and added to the sum\n";
+                sum += num1;
+                even_sequence.push_back(num1);
+            }
+		    cout << "======================================\n";    
+	    
+            if (i == 0)
+            {
+            num1 = 0, num2 = 0;
+            }
+        
+            if (i == 1)
+            {
+                num2 = 1;
+                num1 = 0;
+            }
+        
+            num2 = num2+num1;      //y1 = y0 + x0
+		    num1 = num2 - num1;    //x1 = y0 = y1 - x0
+		
+            sequence.push_back(num1);
+            ++i;		
+	    }
+
+	    cout << "index size = " << i;	
+
+        //print the fib sequence
+        cout << "\nThe fibonacci sequence is below: \n";
+        for (int x : sequence)
+        {
+            std::cout << x << " ";
+        }
+
+        //print the even fib sequence
+        cout << "\n\nThe even fibonacci sequence is below: \n";
+        for (int y : even_sequence)
+        {
+            std::cout << y << " ";
+        }
+
+        //print the sum
+        cout << "\nThe sum is: " << sum << "\n";
+}
+
 int main()
 {
-	//this sequence will start at 1
-    //i will use vectors
-    unsigned long first = 1,
-    second = 2,
-    sum = 0;
-    int SIZE = 100000;
-
-    unsigned long fib[SIZE];
-    fib[0] = first;
-    fib[1] = second;
-    cout << first << " " << second << " ";
-
-    //since 2 % 2 == 0 add it to sum now
-    sum += second;
-
-    for (int i = 2; i < SIZE; ++i)
-    {
-        if(fib[i] >= 4000000)
-            break;
-
-        fib[i] = first + second;   //if i = 2, fib[i] = 1 + 2 = 3
-        first = fib[i-1];  //if i = 2, first is now 2 or fib[1]
-        second = fib[i]; //if i = 2, second = 3 or fib[2] 
-        
-        if (fib[i] % 2 == 0)
-            sum += fib[i];
-
-        //cout << second << " ";        
-    }
-
-    cout << endl << sum << " ";
-    
-
+	
+    q2();
 }
+
